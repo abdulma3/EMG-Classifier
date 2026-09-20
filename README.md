@@ -6,7 +6,7 @@ A real-time system that reads electrical activity from a flexing muscle via a su
 ## What it does
 
 A MyoWare 2.0 Muscle Sensor picks up electrical activity from the bicep and streams it to an Arduino Nano, which forwards raw readings over serial to a Python pipeline. The pipeline extracts signal features from short windows of that data and feeds them into a Random Forest classifier trained to recognize three states: **rest**, **light flex**, and **hard flex**. A separate real-time gauge turns that classification into continuous visual feedback — similar in principle to EMG biofeedback tools used in physical therapy for muscle re-education.
-![Hardware setup](images/hardware_photo.jpg)
+
 ## Hardware
 
 - MyoWare 2.0 Muscle Sensor (SparkFun DEV-27924)
@@ -14,7 +14,9 @@ A MyoWare 2.0 Muscle Sensor picks up electrical activity from the bicep and stre
 - Disposable surface EMG electrode pads, placed on the bicep belly
 - Breadboard + jumper wires
 
-Wiring: Nano `5V` → sensor `VIN`, Nano `GND` → sensor `GND`, Nano `A0` → sensor `ENV` (the smoothed/rectified envelope output).
+![Hardware setup](images/hardware.JPG)
+
+Wiring: Nano `5V` → sensor `VIN`, Nano `GND` → sensor `GND`, Nano `A0` → sensor `ENV`
 
 ## Pipeline
 
@@ -47,6 +49,10 @@ Feature importance was roughly even across MAV, RMS, WL, and STD (~0.19-0.28 eac
 ## Biofeedback trainer
 
 `biofeedback.py` reuses the trained classifier but reframes its output: instead of a discrete label, it computes a continuous 0-100% activation score (a probability-weighted blend across the three classes) and displays it on a live, color-coded gauge.
+
+| Rest | Light flex | Hard flex |
+|---|---|---|
+| ![Rest](images/rest.png) | ![Light flex](images/light_flex.png) | ![Hard flex](images/hard_flex.png) |
 
 This mirrors the real-time feedback loop used in clinical EMG biofeedback for muscle re-education — for example, post-surgical quadriceps activation or post-stroke motor recovery, where a patient uses a visual signal of their own muscle activity to relearn graduated control. This project is a personal proof-of-concept demonstrating that sensing-and-feedback mechanism, not a validated or tested rehabilitation device.
 
