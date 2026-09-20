@@ -6,7 +6,7 @@ A real-time system that reads electrical activity from a flexing muscle via a su
 ## What it does
 
 A MyoWare 2.0 Muscle Sensor picks up electrical activity from the bicep and streams it to an Arduino Nano, which forwards raw readings over serial to a Python pipeline. The pipeline extracts signal features from short windows of that data and feeds them into a Random Forest classifier trained to recognize three states: **rest**, **light flex**, and **hard flex**. A separate real-time gauge turns that classification into continuous visual feedback — similar in principle to EMG biofeedback tools used in physical therapy for muscle re-education.
-
+![Hardware setup](images/hardware_photo.jpg)
 ## Hardware
 
 - MyoWare 2.0 Muscle Sensor (SparkFun DEV-27924)
